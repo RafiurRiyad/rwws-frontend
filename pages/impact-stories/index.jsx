@@ -63,7 +63,7 @@ export async function getStaticProps() {
         page,
         homeContent: homeData.content[0] || null,
       },
-      revalidate: 3600,
+      revalidate: 10,
     };
   } catch (error) {
     return {

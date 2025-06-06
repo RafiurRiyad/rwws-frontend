@@ -65,6 +65,7 @@ export async function getStaticProps() {
         page,
         homeContent: homeData?.content?.[0] || null,
       },
+      revalidate: 10,
     };
   } catch (error) {
     console.error("Error fetching data:", error);

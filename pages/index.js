@@ -49,7 +49,7 @@ export async function getStaticProps() {
         impactStories: withSlugs(storyContent.data.storyList),
         newsItems: withSlugs(newsContent.data.newsList),
       },
-      revalidate: 3600,
+      revalidate: 10,
     };
   } catch (error) {
     console.error("Error in getStaticProps:", error);

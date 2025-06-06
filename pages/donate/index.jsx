@@ -38,7 +38,7 @@ export async function getStaticProps() {
       props: {
         homeContent: homeData.content[0] || null,
       },
-      revalidate: 3600, // ISR revalidation
+      revalidate: 10, // ISR revalidation
     };
   } catch (error) {
     console.error("Error in getStaticProps:", error);

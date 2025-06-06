@@ -27,7 +27,7 @@ export async function middleware(request) {
         `${process.env.NEXT_PUBLIC_API_URL}/news/${id}`,
         {
           headers: {
-            "Cache-Control": "public, s-maxage=3600", // Cache for 1 hour
+            "Cache-Control": "public, s-maxage=10", // Cache for 10 seconds
           },
         }
       );
@@ -62,7 +62,7 @@ export async function middleware(request) {
         `${process.env.NEXT_PUBLIC_API_URL}/program/${id}`,
         {
           headers: {
-            "Cache-Control": "public, s-maxage=3600",
+            "Cache-Control": "public, s-maxage=10",
           },
         }
       );
@@ -95,7 +95,7 @@ export async function middleware(request) {
         `${process.env.NEXT_PUBLIC_API_URL}/story/${id}`,
         {
           headers: {
-            "Cache-Control": "public, s-maxage=3600",
+            "Cache-Control": "public, s-maxage=10",
           },
         }
       );
@@ -133,7 +133,7 @@ export async function middleware(request) {
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/${path}/${id}`,
-          { headers: { "Cache-Control": "public, s-maxage=3600" } }
+          { headers: { "Cache-Control": "public, s-maxage=10" } }
         );
 
         if (response.ok) {

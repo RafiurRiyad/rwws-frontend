@@ -6,14 +6,25 @@ import { Menu, X, Heart, Sun, Moon } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { auth } from "@/lib/auth";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setLoggedIn(auth.getAccessToken() !== null);
+    const handleStorageChange = () => {
+      setLoggedIn(auth.getAccessToken() !== null);
+    };
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   const toggleMenu = () => {
@@ -24,16 +35,19 @@ const Navbar = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  const navLinks = [
+  const baseLinks = [
     { name: "Home", href: "/" },
     { name: "Impact Stories", href: "/impact-stories" },
     { name: "News", href: "/news" },
-    // { name: "Blog", href: "/blog" },
-    // { name: "Events", href: "/events" },
-    // { name: "Gallery", href: "/gallery" },
     { name: "Programs", href: "/programs" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
+  ];
+
+  // Conditionally add Dashboard link
+  const navLinks = [
+    ...(loggedIn ? [{ name: "Dashboard", href: "/admin" }] : []),
+    ...baseLinks,
   ];
 
   return (
