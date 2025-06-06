@@ -97,7 +97,7 @@ export async function getStaticProps({ params }) {
     const response = await getById("story", storyItem.id);
     return {
       props: { storyItem: response.data },
-      revalidate: 86400,
+      revalidate: 10,
     };
   } catch (error) {
     return { notFound: true };

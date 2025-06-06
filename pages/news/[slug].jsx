@@ -87,7 +87,7 @@ export async function getStaticProps({ params }) {
 
     // Get full details using the found ID
     const response = await getById("news", newsItem.id);
-    return { props: { newsItem: response.data } };
+    return { props: { newsItem: response.data }, revalidate: 10 };
   } catch (error) {
     return { notFound: true };
   }

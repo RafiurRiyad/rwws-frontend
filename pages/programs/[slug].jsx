@@ -92,7 +92,7 @@ export async function getStaticProps({ params }) {
     const response = await getById("program", program.id);
     return {
       props: { program: response.data },
-      revalidate: 86400, // Keep existing revalidation
+      revalidate: 10, // Keep existing revalidation
     };
   } catch (error) {
     return { notFound: true };
